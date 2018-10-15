@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.backendSystem.dao.BannerShowMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.backendSystem.pojo.BannerShow" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="tiles_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="photo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_online" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="jump_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="industry_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="gmt_create" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="gmt_update" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jnshu.backendSystem.pojo.BannerShow" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="tiles_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="photo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_online" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="jump_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="industry_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="gmt_create" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="gmt_update" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="online_time" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, tiles_name, photo, is_online, jump_url, industry_type, gmt_create, gmt_update, 
+    create_by, update_by
+  </sql>
+  <sql id="Blob_Column_List" >
+    online_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from banner_show
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from banner_show
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.backendSystem.pojo.BannerShow" >
+    insert into banner_show (id, type, tiles_name, 
+      photo, is_online, jump_url, 
+      industry_type, gmt_create, gmt_update, 
+      create_by, update_by, online_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{tilesName,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{isOnline,jdbcType=INTEGER}, #{jumpUrl,jdbcType=VARCHAR}, 
+      #{industryType,jdbcType=INTEGER}, #{gmtCreate,jdbcType=BIGINT}, #{gmtUpdate,jdbcType=BIGINT}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{onlineTime,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.backendSystem.pojo.BannerShow" >
+    insert into banner_show
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="tilesName != null" >
+        tiles_name,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="isOnline != null" >
+        is_online,
+      </if>
+      <if test="jumpUrl != null" >
+        jump_url,
+      </if>
+      <if test="industryType != null" >
+        industry_type,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="onlineTime != null" >
+        online_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="tilesName != null" >
+        #{tilesName,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnline != null" >
+        #{isOnline,jdbcType=INTEGER},
+      </if>
+      <if test="jumpUrl != null" >
+        #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="industryType != null" >
+        #{industryType,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null" >
+        #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.backendSystem.pojo.BannerShow" >
+    update banner_show
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="tilesName != null" >
+        tiles_name = #{tilesName,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnline != null" >
+        is_online = #{isOnline,jdbcType=INTEGER},
+      </if>
+      <if test="jumpUrl != null" >
+        jump_url = #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="industryType != null" >
+        industry_type = #{industryType,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineTime != null" >
+        online_time = #{onlineTime,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jnshu.backendSystem.pojo.BannerShow" >
+    update banner_show
+    set type = #{type,jdbcType=INTEGER},
+      tiles_name = #{tilesName,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      is_online = #{isOnline,jdbcType=INTEGER},
+      jump_url = #{jumpUrl,jdbcType=VARCHAR},
+      industry_type = #{industryType,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      online_time = #{onlineTime,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.backendSystem.pojo.BannerShow" >
+    update banner_show
+    set type = #{type,jdbcType=INTEGER},
+      tiles_name = #{tilesName,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      is_online = #{isOnline,jdbcType=INTEGER},
+      jump_url = #{jumpUrl,jdbcType=VARCHAR},
+      industry_type = #{industryType,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

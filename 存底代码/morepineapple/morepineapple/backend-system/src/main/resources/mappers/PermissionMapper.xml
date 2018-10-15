@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.backendSystem.dao.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.backendSystem.pojo.Permission" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="permission_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="in_new" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="in_edit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="in_delete" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="gmt_create" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="gmt_update" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, permission_name, in_new, in_edit, in_delete, gmt_create, gmt_update, create_by, 
+    update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.backendSystem.pojo.Permission" >
+    insert into permission (id, permission_name, in_new, 
+      in_edit, in_delete, gmt_create, 
+      gmt_update, create_by, update_by
+      )
+    values (#{id,jdbcType=INTEGER}, #{permissionName,jdbcType=VARCHAR}, #{inNew,jdbcType=INTEGER}, 
+      #{inEdit,jdbcType=INTEGER}, #{inDelete,jdbcType=INTEGER}, #{gmtCreate,jdbcType=BIGINT}, 
+      #{gmtUpdate,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.backendSystem.pojo.Permission" >
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="permissionName != null" >
+        permission_name,
+      </if>
+      <if test="inNew != null" >
+        in_new,
+      </if>
+      <if test="inEdit != null" >
+        in_edit,
+      </if>
+      <if test="inDelete != null" >
+        in_delete,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="permissionName != null" >
+        #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="inNew != null" >
+        #{inNew,jdbcType=INTEGER},
+      </if>
+      <if test="inEdit != null" >
+        #{inEdit,jdbcType=INTEGER},
+      </if>
+      <if test="inDelete != null" >
+        #{inDelete,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null" >
+        #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.backendSystem.pojo.Permission" >
+    update permission
+    <set >
+      <if test="permissionName != null" >
+        permission_name = #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="inNew != null" >
+        in_new = #{inNew,jdbcType=INTEGER},
+      </if>
+      <if test="inEdit != null" >
+        in_edit = #{inEdit,jdbcType=INTEGER},
+      </if>
+      <if test="inDelete != null" >
+        in_delete = #{inDelete,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.backendSystem.pojo.Permission" >
+    update permission
+    set permission_name = #{permissionName,jdbcType=VARCHAR},
+      in_new = #{inNew,jdbcType=INTEGER},
+      in_edit = #{inEdit,jdbcType=INTEGER},
+      in_delete = #{inDelete,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

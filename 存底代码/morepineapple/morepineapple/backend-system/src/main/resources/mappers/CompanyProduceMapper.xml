@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.backendSystem.dao.CompanyProduceMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.backendSystem.pojo.CompanyProduce" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="company_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="produce_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="produce_slogan" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="produce_logo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="produce_introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="gmt_create" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="gmt_update" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, company_id, produce_name, produce_slogan, produce_logo, produce_introduction, 
+    gmt_create, gmt_update, create_by, update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from company_produce
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from company_produce
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.backendSystem.pojo.CompanyProduce" >
+    insert into company_produce (id, company_id, produce_name, 
+      produce_slogan, produce_logo, produce_introduction, 
+      gmt_create, gmt_update, create_by, 
+      update_by)
+    values (#{id,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}, #{produceName,jdbcType=VARCHAR}, 
+      #{produceSlogan,jdbcType=VARCHAR}, #{produceLogo,jdbcType=VARCHAR}, #{produceIntroduction,jdbcType=VARCHAR}, 
+      #{gmtCreate,jdbcType=BIGINT}, #{gmtUpdate,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.backendSystem.pojo.CompanyProduce" >
+    insert into company_produce
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="produceName != null" >
+        produce_name,
+      </if>
+      <if test="produceSlogan != null" >
+        produce_slogan,
+      </if>
+      <if test="produceLogo != null" >
+        produce_logo,
+      </if>
+      <if test="produceIntroduction != null" >
+        produce_introduction,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="produceName != null" >
+        #{produceName,jdbcType=VARCHAR},
+      </if>
+      <if test="produceSlogan != null" >
+        #{produceSlogan,jdbcType=VARCHAR},
+      </if>
+      <if test="produceLogo != null" >
+        #{produceLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="produceIntroduction != null" >
+        #{produceIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null" >
+        #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.backendSystem.pojo.CompanyProduce" >
+    update company_produce
+    <set >
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="produceName != null" >
+        produce_name = #{produceName,jdbcType=VARCHAR},
+      </if>
+      <if test="produceSlogan != null" >
+        produce_slogan = #{produceSlogan,jdbcType=VARCHAR},
+      </if>
+      <if test="produceLogo != null" >
+        produce_logo = #{produceLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="produceIntroduction != null" >
+        produce_introduction = #{produceIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.backendSystem.pojo.CompanyProduce" >
+    update company_produce
+    set company_id = #{companyId,jdbcType=BIGINT},
+      produce_name = #{produceName,jdbcType=VARCHAR},
+      produce_slogan = #{produceSlogan,jdbcType=VARCHAR},
+      produce_logo = #{produceLogo,jdbcType=VARCHAR},
+      produce_introduction = #{produceIntroduction,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

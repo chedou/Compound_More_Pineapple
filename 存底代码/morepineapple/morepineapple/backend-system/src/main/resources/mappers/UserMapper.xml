@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.backendSystem.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.backendSystem.pojo.User" >
+    <!--<constructor >-->
+      <!--<idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"   />-->
+      <!--<arg column="name" jdbcType="VARCHAR" javaType="java.lang.String"  />-->
+      <!--<arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+      <!--<arg column="salt" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+      <!--<arg column="phone_num" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+      <!--<arg column="head_image" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+      <!--<arg column="gmt_create" jdbcType="BIGINT" javaType="java.lang.Long" />-->
+      <!--<arg column="gmt_update" jdbcType="BIGINT" javaType="java.lang.Long" />-->
+      <!--<arg column="create_by" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+      <!--<arg column="update_by" jdbcType="VARCHAR" javaType="java.lang.String" />-->
+    <!--</constructor>-->
+    <id column="id" property="id" />
+    <result column="name" property="name"/>
+    <!--<association property=""/>-->
+    <!--<collection property=""/>-->
+    <result column="password" property="password"/>
+    <result column="salt" property="salt"/>
+    <result column="phone_num" property="phoneNum"/>
+    <result column="head_image" property="headImage"/>
+    <result column="gmt_create" property="gmtCreate"/>
+    <result column="gmt_update" property="gmtUpdate"/>
+    <result column="create_by" property="createBy"/>
+    <result column="update_by" property="updateBy"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, password, salt, phone_num, head_image, gmt_create, gmt_update, create_by,
+    update_by
+  </sql>
+
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where id = #{id}
+  </select>
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >-->
+    <!--delete from user-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</delete>-->
+
+  <insert id="insert" parameterType="com.jnshu.backendSystem.pojo.User" >
+    insert into user (id, name, password,
+      salt, phone_num, head_image,
+      gmt_create, gmt_update, create_by,
+      update_by)
+    values (#{id}, #{name}, #{password},
+      #{salt}, #{phoneNum}, #{headImage},
+      #{gmtCreate}, #{gmtUpdate}, #{createBy},
+      #{updateBy})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.jnshu.backendSystem.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="password != null" >
+        passwoed,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="phoneNum != null" >
+        phone_num,
+      </if>
+      <if test="headImage != null" >
+        head_image,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{passwoed,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null" >
+        #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null" >
+        #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.backendSystem.pojo.User" >
+    update user
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        passwoed = #{passwoed,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null" >
+        head_image = #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.backendSystem.pojo.User" >
+    update user
+    set name = #{name},
+      passwoed = #{password},
+      salt = #{salt},
+      phone_num = #{phoneNum},
+      head_image = #{headImage},
+      gmt_create = #{gmtCreate},
+      gmt_update = #{gmtUpdate},
+      create_by = #{createBy},
+      update_by = #{updateBy}
+    where id = #{id}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+  </select>
+
+
+</mapper>

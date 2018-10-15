@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.backendSystem.dao.PositionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.backendSystem.pojo.PositionInfo" >
+    <constructor >
+      <idArg column="position_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="is_recommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="position_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="company_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="work_experience" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="education" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="salary" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="position_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="position_tag" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="positionlevel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="post_duties" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="skills" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="welfare" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_online" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="gmt_create" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="gmt_update" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jnshu.backendSystem.pojo.PositionInfoWithBLOBs" >
+    <constructor >
+      <idArg column="position_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="is_recommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="position_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="company_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="work_experience" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="education" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="salary" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="position_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="position_tag" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="positionlevel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="post_duties" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="skills" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="welfare" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_online" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="gmt_create" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="gmt_update" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="company_id" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="online_time" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    position_id, is_recommend, position_name, company_name, work_experience, education, 
+    salary, position_type, position_tag, positionlevel, post_duties, skills, welfare, 
+    is_online, gmt_create, gmt_update, create_by, update_by
+  </sql>
+  <sql id="Blob_Column_List" >
+    company_id, online_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from position_info
+    where position_id = #{positionId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from position_info
+    where position_id = #{positionId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.backendSystem.pojo.PositionInfoWithBLOBs" >
+    insert into position_info (position_id, is_recommend, position_name, 
+      company_name, work_experience, education, 
+      salary, position_type, position_tag, 
+      positionlevel, post_duties, skills, 
+      welfare, is_online, gmt_create, 
+      gmt_update, create_by, update_by, 
+      company_id, online_time)
+    values (#{positionId,jdbcType=BIGINT}, #{isRecommend,jdbcType=INTEGER}, #{positionName,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{workExperience,jdbcType=INTEGER}, #{education,jdbcType=INTEGER}, 
+      #{salary,jdbcType=INTEGER}, #{positionType,jdbcType=INTEGER}, #{positionTag,jdbcType=VARCHAR}, 
+      #{positionlevel,jdbcType=VARCHAR}, #{postDuties,jdbcType=VARCHAR}, #{skills,jdbcType=VARCHAR}, 
+      #{welfare,jdbcType=VARCHAR}, #{isOnline,jdbcType=INTEGER}, #{gmtCreate,jdbcType=BIGINT}, 
+      #{gmtUpdate,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=LONGVARCHAR}, #{onlineTime,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.backendSystem.pojo.PositionInfoWithBLOBs" >
+    insert into position_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="positionId != null" >
+        position_id,
+      </if>
+      <if test="isRecommend != null" >
+        is_recommend,
+      </if>
+      <if test="positionName != null" >
+        position_name,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="workExperience != null" >
+        work_experience,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="positionType != null" >
+        position_type,
+      </if>
+      <if test="positionTag != null" >
+        position_tag,
+      </if>
+      <if test="positionlevel != null" >
+        positionlevel,
+      </if>
+      <if test="postDuties != null" >
+        post_duties,
+      </if>
+      <if test="skills != null" >
+        skills,
+      </if>
+      <if test="welfare != null" >
+        welfare,
+      </if>
+      <if test="isOnline != null" >
+        is_online,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="onlineTime != null" >
+        online_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="positionId != null" >
+        #{positionId,jdbcType=BIGINT},
+      </if>
+      <if test="isRecommend != null" >
+        #{isRecommend,jdbcType=INTEGER},
+      </if>
+      <if test="positionName != null" >
+        #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperience != null" >
+        #{workExperience,jdbcType=INTEGER},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=INTEGER},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="positionType != null" >
+        #{positionType,jdbcType=INTEGER},
+      </if>
+      <if test="positionTag != null" >
+        #{positionTag,jdbcType=VARCHAR},
+      </if>
+      <if test="positionlevel != null" >
+        #{positionlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="postDuties != null" >
+        #{postDuties,jdbcType=VARCHAR},
+      </if>
+      <if test="skills != null" >
+        #{skills,jdbcType=VARCHAR},
+      </if>
+      <if test="welfare != null" >
+        #{welfare,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnline != null" >
+        #{isOnline,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null" >
+        #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.backendSystem.pojo.PositionInfoWithBLOBs" >
+    update position_info
+    <set >
+      <if test="isRecommend != null" >
+        is_recommend = #{isRecommend,jdbcType=INTEGER},
+      </if>
+      <if test="positionName != null" >
+        position_name = #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="workExperience != null" >
+        work_experience = #{workExperience,jdbcType=INTEGER},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=INTEGER},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="positionType != null" >
+        position_type = #{positionType,jdbcType=INTEGER},
+      </if>
+      <if test="positionTag != null" >
+        position_tag = #{positionTag,jdbcType=VARCHAR},
+      </if>
+      <if test="positionlevel != null" >
+        positionlevel = #{positionlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="postDuties != null" >
+        post_duties = #{postDuties,jdbcType=VARCHAR},
+      </if>
+      <if test="skills != null" >
+        skills = #{skills,jdbcType=VARCHAR},
+      </if>
+      <if test="welfare != null" >
+        welfare = #{welfare,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnline != null" >
+        is_online = #{isOnline,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="onlineTime != null" >
+        online_time = #{onlineTime,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where position_id = #{positionId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jnshu.backendSystem.pojo.PositionInfoWithBLOBs" >
+    update position_info
+    set is_recommend = #{isRecommend,jdbcType=INTEGER},
+      position_name = #{positionName,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      work_experience = #{workExperience,jdbcType=INTEGER},
+      education = #{education,jdbcType=INTEGER},
+      salary = #{salary,jdbcType=INTEGER},
+      position_type = #{positionType,jdbcType=INTEGER},
+      position_tag = #{positionTag,jdbcType=VARCHAR},
+      positionlevel = #{positionlevel,jdbcType=VARCHAR},
+      post_duties = #{postDuties,jdbcType=VARCHAR},
+      skills = #{skills,jdbcType=VARCHAR},
+      welfare = #{welfare,jdbcType=VARCHAR},
+      is_online = #{isOnline,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=LONGVARCHAR},
+      online_time = #{onlineTime,jdbcType=LONGVARCHAR}
+    where position_id = #{positionId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.backendSystem.pojo.PositionInfo" >
+    update position_info
+    set is_recommend = #{isRecommend,jdbcType=INTEGER},
+      position_name = #{positionName,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      work_experience = #{workExperience,jdbcType=INTEGER},
+      education = #{education,jdbcType=INTEGER},
+      salary = #{salary,jdbcType=INTEGER},
+      position_type = #{positionType,jdbcType=INTEGER},
+      position_tag = #{positionTag,jdbcType=VARCHAR},
+      positionlevel = #{positionlevel,jdbcType=VARCHAR},
+      post_duties = #{postDuties,jdbcType=VARCHAR},
+      skills = #{skills,jdbcType=VARCHAR},
+      welfare = #{welfare,jdbcType=VARCHAR},
+      is_online = #{isOnline,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where position_id = #{positionId,jdbcType=BIGINT}
+  </update>
+</mapper>
