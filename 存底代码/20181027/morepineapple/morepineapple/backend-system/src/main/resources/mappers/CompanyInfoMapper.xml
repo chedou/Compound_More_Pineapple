@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.backendSystem.dao.CompanyInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jnshu.backendSystem.pojo.CompanyInfo">
+    <!--<constructor>-->
+      <!--<idArg column="company_id" javaType="java.lang.Long" jdbcType="BIGINT" />-->
+      <!--<arg column="company_name" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="company_slogan" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="number_of_companies" javaType="java.lang.Long" jdbcType="BIGINT" />-->
+      <!--<arg column="financing_scale" javaType="java.lang.Integer" jdbcType="INTEGER" />-->
+      <!--<arg column="city" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="area" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="company_industry" javaType="java.lang.Integer" jdbcType="INTEGER" />-->
+      <!--<arg column="company_logo" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="company_profile" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="company_tag" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="Is_approve" javaType="java.lang.Integer" jdbcType="INTEGER" />-->
+      <!--<arg column="Is_frozen" javaType="java.lang.Integer" jdbcType="INTEGER" />-->
+      <!--<arg column="gmt_create" javaType="java.lang.Long" jdbcType="BIGINT" />-->
+      <!--<arg column="gmt_update" javaType="java.lang.Long" jdbcType="BIGINT" />-->
+      <!--<arg column="create_by" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="update_by" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+    <!--</constructor>-->
+    <id column="company_id" property="companyId" />
+    <result column="company_name" property="companyName"/>
+    <result column="companySlogan" property="companySlogan"/>
+    <result column="number_of_companies" property="numberOfCompanies"/>
+    <result column="financing_scale" property="financingScale"/>
+    <result column="city" property="city"/>
+    <result column="area" property="area"/>
+    <result column="company_industry" property="companyIndustry"/>
+    <result column="company_logo" property="companyLogo"/>
+    <result column="company_profile" property="companyProfile"/>
+    <result column="company_tag" property="companyTag"/>
+    <result column="Is_approve" property="isApprove"/>
+    <result column="Is_frozen" property="isFrozen"/>
+    <result column="gmt_create" property="gmtCreate"/>
+    <result column="gmt_update" property="gmtUpdate"/>
+    <result column="create_by" property="createBy"/>
+    <result column="update_by" property="updateBy"/>
+    <collection property="companyProduce" />
+    <collection property="recruitingCompanyInformation" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id, company_name, company_slogan, number_of_companies, financing_scale, city, 
+    area, company_industry, company_logo, company_profile, company_tag, Is_approve, Is_frozen, 
+    gmt_create, gmt_update, create_by, update_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from company_info
+    where company_id = #{companyId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from company_info
+    where company_id = #{companyId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.backendSystem.pojo.CompanyInfo">
+    insert into company_info (company_id, company_name, company_slogan, 
+      number_of_companies, financing_scale, city, 
+      area, company_industry, company_logo, 
+      company_profile, company_tag, Is_approve, 
+      Is_frozen, gmt_create, gmt_update, 
+      create_by, update_by)
+    values (#{companyId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR}, #{companySlogan,jdbcType=VARCHAR}, 
+      #{numberOfCompanies,jdbcType=BIGINT}, #{financingScale,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{companyIndustry,jdbcType=INTEGER}, #{companyLogo,jdbcType=VARCHAR}, 
+      #{companyProfile,jdbcType=VARCHAR}, #{companyTag,jdbcType=VARCHAR}, #{isApprove,jdbcType=INTEGER}, 
+      #{isFrozen,jdbcType=INTEGER}, #{gmtCreate,jdbcType=BIGINT}, #{gmtUpdate,jdbcType=BIGINT}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.backendSystem.pojo.CompanyInfo">
+    insert into company_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companySlogan != null">
+        company_slogan,
+      </if>
+      <if test="numberOfCompanies != null">
+        number_of_companies,
+      </if>
+      <if test="financingScale != null">
+        financing_scale,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="companyIndustry != null">
+        company_industry,
+      </if>
+      <if test="companyLogo != null">
+        company_logo,
+      </if>
+      <if test="companyProfile != null">
+        company_profile,
+      </if>
+      <if test="companyTag != null">
+        company_tag,
+      </if>
+      <if test="isApprove != null">
+        Is_approve,
+      </if>
+      <if test="isFrozen != null">
+        Is_frozen,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companySlogan != null">
+        #{companySlogan,jdbcType=VARCHAR},
+      </if>
+      <if test="numberOfCompanies != null">
+        #{numberOfCompanies,jdbcType=BIGINT},
+      </if>
+      <if test="financingScale != null">
+        #{financingScale,jdbcType=INTEGER},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIndustry != null">
+        #{companyIndustry,jdbcType=INTEGER},
+      </if>
+      <if test="companyLogo != null">
+        #{companyLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProfile != null">
+        #{companyProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTag != null">
+        #{companyTag,jdbcType=VARCHAR},
+      </if>
+      <if test="isApprove != null">
+        #{isApprove,jdbcType=INTEGER},
+      </if>
+      <if test="isFrozen != null">
+        #{isFrozen,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null">
+        #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.backendSystem.pojo.CompanyInfo">
+    update company_info
+    <set>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companySlogan != null">
+        company_slogan = #{companySlogan,jdbcType=VARCHAR},
+      </if>
+      <if test="numberOfCompanies != null">
+        number_of_companies = #{numberOfCompanies,jdbcType=BIGINT},
+      </if>
+      <if test="financingScale != null">
+        financing_scale = #{financingScale,jdbcType=INTEGER},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIndustry != null">
+        company_industry = #{companyIndustry,jdbcType=INTEGER},
+      </if>
+      <if test="companyLogo != null">
+        company_logo = #{companyLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProfile != null">
+        company_profile = #{companyProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTag != null">
+        company_tag = #{companyTag,jdbcType=VARCHAR},
+      </if>
+      <if test="isApprove != null">
+        Is_approve = #{isApprove,jdbcType=INTEGER},
+      </if>
+      <if test="isFrozen != null">
+        Is_frozen = #{isFrozen,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.backendSystem.pojo.CompanyInfo">
+    update company_info
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      company_slogan = #{companySlogan,jdbcType=VARCHAR},
+      number_of_companies = #{numberOfCompanies,jdbcType=BIGINT},
+      financing_scale = #{financingScale,jdbcType=INTEGER},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      company_industry = #{companyIndustry,jdbcType=INTEGER},
+      company_logo = #{companyLogo,jdbcType=VARCHAR},
+      company_profile = #{companyProfile,jdbcType=VARCHAR},
+      company_tag = #{companyTag,jdbcType=VARCHAR},
+      Is_approve = #{isApprove,jdbcType=INTEGER},
+      Is_frozen = #{isFrozen,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectCompanyInfoList" resultMap="BaseResultMap">
+    select
+    c.companyId,
+    c.companyName,
+    c.companyLogo,
+    c.city,
+    c.area,
+    p.positionId,
+    p.positionName,
+    p.salary,
+    p.salary,
+    p.education,
+    p.workExperience,
+    p.welfare,
+    p.gmt_update
+    <where>
+      c.companyId=p.companyId
+      <if test="c.companyName != null and c.companyName != ''">
+        AND  c.companyName like CONCAT('%',#{companyName},'%')
+      </if>
+      <if test="p.positioName != null and p.positioName != ''">
+        AND  p.positioName = #{positioName}
+      </if>
+      <if test="c.positioName != null and c.positioName != ''">
+        AND  c.city = #{city}
+      </if>
+      <if test="c.companyIndustry != null and c.companyIndustry != ''">
+        AND  c.companyIndustry = #{companyIndustry}
+      </if>
+      <if test="p.workExperience != null and p.workExperience != ''">
+        AND  p.workExperience = #{workExperience}
+      </if>
+      <if test="p.salary != null and p.salary != ''">
+        AND  p.salary = #{salary}
+      </if>
+      <if test="p.releaseTime != null and p.releaseTime != ''">
+        AND  p.releaseTime = #{releaseTime}
+      </if>
+      <if test="limit != null and limit != ''">
+        AND limit = #{limit}
+      </if>
+    </where>
+    from company_info
+  </select>
+
+
+</mapper>
