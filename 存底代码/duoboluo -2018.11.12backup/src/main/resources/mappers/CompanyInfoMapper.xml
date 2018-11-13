@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.backendsystem.dao.CompanyInfoMapper">
+    <resultMap id="BaseResultMap" type="com.jnshu.backendsystem.pojo.CompanyInfo">
+        <id column="company_id" jdbcType="BIGINT" property="companyId"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="company_slogan" jdbcType="VARCHAR" property="companySlogan"/>
+        <result column="number_of_companies" jdbcType="BIGINT" property="numberOfCompanies"/>
+        <result column="financing_scale" jdbcType="INTEGER" property="financingScale"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
+        <result column="company_industry" jdbcType="INTEGER" property="companyIndustry"/>
+        <result column="company_logo" jdbcType="VARCHAR" property="companyLogo"/>
+        <result column="company_profile" jdbcType="VARCHAR" property="companyProfile"/>
+        <result column="company_tag" jdbcType="VARCHAR" property="companyTag"/>
+        <result column="Is_approve" jdbcType="INTEGER" property="isApprove"/>
+        <result column="Is_frozen" jdbcType="INTEGER" property="isFrozen"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="numberOfPositions" jdbcType="INTEGER" property="numberOfPositions"/>
+    </resultMap>
+
+    <resultMap id="queryCompanyInfoListMap" type="com.jnshu.backendsystem.pojo.CompanyInfo">
+        <id column="company_id" jdbcType="BIGINT" property="companyId"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="company_slogan" jdbcType="VARCHAR" property="companySlogan"/>
+        <result column="number_of_companies" jdbcType="BIGINT" property="numberOfCompanies"/>
+        <result column="financing_scale" jdbcType="INTEGER" property="financingScale"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
+        <result column="company_industry" jdbcType="INTEGER" property="companyIndustry"/>
+        <result column="company_logo" jdbcType="VARCHAR" property="companyLogo"/>
+        <result column="company_profile" jdbcType="VARCHAR" property="companyProfile"/>
+        <result column="company_tag" jdbcType="VARCHAR" property="companyTag"/>
+        <result column="Is_approve" jdbcType="INTEGER" property="isApprove"/>
+        <result column="Is_frozen" jdbcType="INTEGER" property="isFrozen"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <collection property="positionInfos" javaType="java.util.List"
+                    ofType="com.jnshu.backendsystem.pojo.PositionInfo">
+            <id column="position_id" jdbcType="BIGINT" property="positionId"/>
+            <result column="is_recommend" jdbcType="INTEGER" property="isRecommend"/>
+            <result column="position_name" jdbcType="VARCHAR" property="positionName"/>
+            <!--<result column="company_id" jdbcType="BIGINT" property="companyId"/>-->
+            <!--<result column="company_name" jdbcType="VARCHAR" property="companyName"/>-->
+            <result column="work_experience" jdbcType="INTEGER" property="workExperience"/>
+            <result column="education" jdbcType="INTEGER" property="education"/>
+            <result column="salary" jdbcType="INTEGER" property="salary"/>
+            <result column="position_type" jdbcType="INTEGER" property="positionType"/>
+            <result column="position_tag" jdbcType="VARCHAR" property="positionTag"/>
+            <result column="positionlevel" jdbcType="VARCHAR" property="positionlevel"/>
+            <result column="post_duties" jdbcType="VARCHAR" property="postDuties"/>
+            <result column="skills" jdbcType="VARCHAR" property="skills"/>
+            <result column="welfare" jdbcType="VARCHAR" property="welfare"/>
+            <result column="online_time" jdbcType="BIGINT" property="onlineTime"/>
+            <result column="is_online" jdbcType="INTEGER" property="isOnline"/>
+            <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+            <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+            <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+            <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="queryCompanyInfoAndProdureListMap" type="com.jnshu.backendsystem.pojo.CompanyInfo">
+        <id column="company_id" jdbcType="BIGINT" property="companyId"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="company_slogan" jdbcType="VARCHAR" property="companySlogan"/>
+        <result column="number_of_companies" jdbcType="BIGINT" property="numberOfCompanies"/>
+        <result column="financing_scale" jdbcType="INTEGER" property="financingScale"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
+        <result column="company_industry" jdbcType="INTEGER" property="companyIndustry"/>
+        <result column="company_logo" jdbcType="VARCHAR" property="companyLogo"/>
+        <result column="company_profile" jdbcType="VARCHAR" property="companyProfile"/>
+        <result column="company_tag" jdbcType="VARCHAR" property="companyTag"/>
+        <result column="Is_approve" jdbcType="INTEGER" property="isApprove"/>
+        <result column="Is_frozen" jdbcType="INTEGER" property="isFrozen"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <collection property="companyProduces" javaType="java.util.List"
+                    ofType="com.jnshu.backendsystem.pojo.CompanyProduce">
+            <id column="id" jdbcType="BIGINT" property="id"/>
+            <result column="company_id" jdbcType="BIGINT" property="companyId"/>
+            <result column="produce_name" jdbcType="VARCHAR" property="produceName"/>
+            <result column="produce_slogan" jdbcType="VARCHAR" property="produceSlogan"/>
+            <result column="produce_logo" jdbcType="VARCHAR" property="produceLogo"/>
+            <result column="product_introduction" jdbcType="VARCHAR" property="productIntroduction"/>
+            <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+            <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+            <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+            <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="queryCompanyInfoAndRecruitingCompanyInformationListMap"
+               type="com.jnshu.backendsystem.pojo.CompanyInfo">
+        <id column="company_id" jdbcType="BIGINT" property="companyId"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="company_slogan" jdbcType="VARCHAR" property="companySlogan"/>
+        <result column="number_of_companies" jdbcType="BIGINT" property="numberOfCompanies"/>
+        <result column="financing_scale" jdbcType="INTEGER" property="financingScale"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
+        <result column="company_industry" jdbcType="INTEGER" property="companyIndustry"/>
+        <result column="company_logo" jdbcType="VARCHAR" property="companyLogo"/>
+        <result column="company_profile" jdbcType="VARCHAR" property="companyProfile"/>
+        <result column="company_tag" jdbcType="VARCHAR" property="companyTag"/>
+        <result column="Is_approve" jdbcType="INTEGER" property="isApprove"/>
+        <result column="Is_frozen" jdbcType="INTEGER" property="isFrozen"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <collection property="recruitingCompanyInformations" javaType="java.util.List"
+                    ofType="com.jnshu.backendsystem.pojo.RecruitingCompanyInformation">
+            <id column="id" jdbcType="BIGINT" property="id"/>
+            <result column="company_id" jdbcType="BIGINT" property="companyId"/>
+            <result column="phone" jdbcType="VARCHAR" property="phone"/>
+            <result column="email" jdbcType="VARCHAR" property="email"/>
+            <result column="adress" jdbcType="VARCHAR" property="adress"/>
+            <result column="map" jdbcType="VARCHAR" property="map"/>
+            <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+            <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+            <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+            <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        </collection>
+    </resultMap>
+
+    <!--后端前台-->
+    <!--搜索公司-->
+    <select id="findCompanyInfo" resultMap="BaseResultMap">
+        select
+        c.company_id,c.company_name,c.company_logo,c.city,c.area,c.company_industry,c.financing_scale,count(p.position_id)
+        as numberOfPositions
+        from company_info c,position_info p
+        <where>
+            c.company_id=p.company_id AND p.is_online = 1
+            <if test="companyName !=null">
+                AND c.company_name LIKE CONCAT('%',#{companyName},'%')
+            </if>
+            <if test="city !=null">
+                AND c.city IN
+                <foreach item="city" index="index" collection="city"
+                         open="(" separator="," close=")">
+                    #{city}
+                </foreach>
+            </if>
+            <if test="companyIndustry !=null">
+                AND c.company_industry IN
+                <foreach item="companyIndustry" index="index" collection="companyIndustry"
+                         open="(" separator="," close=")">
+                    #{companyIndustry}
+                </foreach>
+            </if>
+            <if test="financingScale !=null">
+                AND c.financing_scale IN
+                <foreach item="financingScale" index="index" collection="financingScale"
+                         open="(" separator="," close=")">
+                    #{financingScale}
+                </foreach>
+            </if>
+            GROUP BY c.company_id
+        </where>
+    </select>
+
+    <!--推荐公司-->
+    <select id="recommendCompany" resultMap="BaseResultMap">
+    (select company_id,company_name,company_logo,city,company_industry,is_approve from company_info where is_approve=1 order by gmt_update desc limit 1)
+     UNION
+    (select company_id,company_name,company_logo,city,company_industry,is_approve from company_info where is_approve=0 order by gmt_update desc limit 8);
+    </select>
+
+    <!--最新发布职位4个认证公司Banner图-->
+    <select id="latestCertificationCompany" resultMap="queryCompanyInfoListMap">
+    select  c.company_id,c.company_name,c.company_logo,c.city,c.area,c.financing_scale,c.company_industry,c.is_approve,
+    p.position_id,p.position_name from company_info c ,position_info p where   p.company_id=c.company_id and
+    c.company_id in(select t.company_id from	(select DISTINCT(company_id) from company_info where  is_approve=1
+    ORDER BY gmt_update desc LIMIT 4) as t ) GROUP BY c.company_id,p.position_id
+    </select>
+
+    <!--公司详情-->
+    <select id="getCompanyDetail" resultMap="BaseResultMap">
+     (select company_id,is_approve,company_name,company_slogan,company_logo,city,area,company_industry,number_of_companies,company_tag,company_profile  from company_info where company_id=#{companyId});
+    </select>
+    <select id="getCompanyProdureDetail" resultMap="queryCompanyInfoAndProdureListMap">
+    (select produce_name,produce_slogan,produce_logo,product_introduction from company_produce where company_id=#{companyId});
+    </select>
+
+    <!--优先查询认证公司，如果不足，查询普通公司补上，8家公司-->
+    <select id="successCase" resultMap="BaseResultMap">
+       select company_id,company_name,company_slogan from company_info ORDER BY is_approve DESC ,gmt_update DESC  limit 8
+    </select>
+
+    <!--公司在招职位-->
+    <select id="recruitmentPosition" resultMap="queryCompanyInfoListMap" parameterType="java.lang.Long">
+        select p.position_id,p.position_name,p.position_type,c.city,p.work_experience,p.education,p.salary,p.gmt_update from position_info p,company_info c where p.company_id=c.company_id  and p.is_online=1 and p.company_id=#{companyId}
+    </select>
+
+
+    <!--后端后台-->
+    <!--查询公司列表-->
+    <select id="qureyCompanyList" resultMap="BaseResultMap">
+        SELECT
+        c.company_id,c.company_name,c.company_industry,c.city,c.area,c.financing_scale,c.is_approve,c.is_frozen
+        FROM company_info AS c INNER JOIN company_produce AS p ON c.company_id = p.company_id
+        <where>
+            <if test="companyName !=null">
+                c.company_name LIKE CONCAT('%',#{companyName},'%')
+            </if>
+            <if test="produceName !=null">
+                AND p.produce_name LIKE CONCAT('%',#{produceName},'%')
+            </if>
+            <if test="companyIndustry !=null">
+                AND c.company_industry =#{companyIndustry}
+            </if>
+            <if test="city !=null">
+                AND c.city =#{city}
+            </if>
+            <if test="area !=null">
+                AND c.area =#{area}
+            </if>
+            <if test="financingScale !=null">
+                AND c.financing_scale =#{financingScale}
+            </if>
+            <if test="isApprove !=null">
+                AND c.is_approve =#{isApprove}
+            </if>
+            <if test="isFrozen !=null">
+                AND c.Is_frozen =#{isFrozen}
+            </if>
+        </where>
+        ORDER BY
+        c.gmt_update
+        DESC
+    </select>
+
+    <!--获取单个公司信息-->
+    <select id="getACompanyInfo" parameterType="java.lang.Long"  resultMap="queryCompanyInfoAndRecruitingCompanyInformationListMap">
+        SELECT c.company_id,c.company_name,c.company_slogan,c.number_of_companies,c.financing_scale,c.city,c.area,c.company_industry,c.company_logo,c.company_profile,c.company_tag,c.Is_approve,c.Is_frozen,
+                r.phone,r.email,r.adress,r.map FROM company_info AS c LEFT JOIN recruiting_company_information AS r ON c.company_id = r.company_id WHERE c.company_id =#{companyId}
+    </select>
+
+    <!--插入公司信息-->
+    <insert id="insertCompanyInfo" parameterType="com.jnshu.backendsystem.pojo.CompanyInfo" useGeneratedKeys="true"
+            keyProperty="companyId">
+        INSERT INTO company_info (company_name,company_slogan,number_of_companies,financing_scale,city,area,company_industry,company_logo,company_profile,company_tag,is_approve,is_frozen,gmt_create,gmt_update,create_by,update_by)
+        VALUES(#{companyName,jdbcType=VARCHAR},#{companySlogan,jdbcType=VARCHAR},#{numberOfCompanies,jdbcType=BIGINT},#{financingScale,jdbcType=INTEGER},#{city,jdbcType=VARCHAR},#{area,jdbcType=VARCHAR},#{companyIndustry,jdbcType=INTEGER},
+               #{companyLogo,jdbcType=VARCHAR},#{companyProfile,jdbcType=VARCHAR},#{companyTag,jdbcType=VARCHAR},#{isApprove,jdbcType=INTEGER},#{isFrozen,jdbcType=INTEGER},#{gmtCreate,jdbcType=BIGINT},#{gmtUpdate,jdbcType=BIGINT},#{createBy,jdbcType=VARCHAR},
+               #{updateBy,jdbcType=VARCHAR})
+    </insert>
+
+    <!--更新公司信息-->
+    <update id="updateCompanyById" parameterType="com.jnshu.backendsystem.pojo.CompanyInfo">
+        UPDATE company_info
+            <set>
+                <if test="companyName != null">
+                    company_name = #{companyName,jdbcType=VARCHAR},
+                </if>
+                <if test="companySlogan != null">
+                    company_slogan = #{companySlogan,jdbcType=VARCHAR},
+                </if>
+                <if test="numberOfCompanies != null">
+                    number_of_companies = #{numberOfCompanies,jdbcType=BIGINT},
+                </if>
+                <if test="financingScale != null">
+                    financing_scale = #{financingScale,jdbcType=INTEGER},
+                </if>
+                <if test="city != null">
+                    city = #{city,jdbcType=VARCHAR},
+                </if>
+                <if test="area != null">
+                    area = #{area,jdbcType=VARCHAR},
+                </if>
+                <if test="companyIndustry != null">
+                    company_industry = #{companyIndustry,jdbcType=INTEGER},
+                </if>
+                <if test="companyLogo != null">
+                    company_logo = #{companyLogo,jdbcType=VARCHAR},
+                </if>
+                <if test="companyProfile != null">
+                    company_profile = #{companyProfile,jdbcType=VARCHAR},
+                </if>
+                <if test="companyTag != null">
+                    company_tag = #{companyTag,jdbcType=VARCHAR},
+                </if>
+                <if test="isApprove != null">
+                    is_approve = #{isApprove,jdbcType=INTEGER},
+                </if>
+                <if test="isFrozen != null">
+                    is_frozen = #{isFrozen,jdbcType=INTEGER},
+                </if>
+                <if test="gmtUpdate != null">
+                    gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+                </if>
+                <if test="updateBy != null">
+                    update_by = #{updateBy,jdbcType=VARCHAR},
+                </if>
+            </set>
+            where company_id = #{companyId,jdbcType=BIGINT}
+    </update>
+
+    <!--修改公司认证状态-->
+    <update id="updateCompanyApproveStatue"  parameterType="com.jnshu.backendsystem.pojo.CompanyInfo">
+        UPDATE company_info SET is_approve=#{isApprove} WHERE company_id=#{companyId}
+    </update>
+
+    <!--修改公司冻结状态-->
+    <update id="updateCompanyFrozenStatue"  parameterType="com.jnshu.backendsystem.pojo.CompanyInfo">
+             UPDATE company_info SET is_frozen=#{isFrozen} WHERE company_id=#{companyId}
+    </update>
+
+    <!--删除公司信息-->
+    <delete id="deleteCompanyInfoByCompanyId" parameterType="java.lang.Long">
+        DELETE FROM company_info WHERE company_id=#{companyId}
+    </delete>
+    
+</mapper>
