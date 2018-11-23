@@ -1,0 +1,52 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+    <!--<!DOCTYPE generatorConfiguration-->
+    <!--PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"-->
+    <!--"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">-->
+
+    <!--<generatorConfiguration>-->
+        <!--<context id="testTables" targetRuntime="MyBatis3">-->
+            <!--<commentGenerator>-->
+                <!--&lt;!&ndash; 是否去除自动生成的注释 true：是 ： false:否 &ndash;&gt;-->
+                <!--<property name="suppressAllComments" value="true" />-->
+            <!--</commentGenerator>-->
+            <!--&lt;!&ndash;数据库连接的信息：驱动类、连接地址、用户名、密码 &ndash;&gt;-->
+            <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+                            <!--connectionURL="jdbc:mysql:///more_pineapple" userId="root"-->
+                            <!--password="root123">-->
+            <!--</jdbcConnection>-->
+            <!--&lt;!&ndash; 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和-->
+                <!--NUMERIC 类型解析为java.math.BigDecimal &ndash;&gt;-->
+            <!--<javaTypeResolver>-->
+                <!--<property name="forceBigDecimals" value="false" />-->
+            <!--</javaTypeResolver>-->
+
+            <!--&lt;!&ndash; targetProject:生成PO类的位置 &ndash;&gt;-->
+            <!--<javaModelGenerator targetPackage="src.main.java.com.jnshu.backendsystem.pojo"-->
+                                <!--targetProject=".\src">-->
+                <!--&lt;!&ndash; enableSubPackages:是否让schema作为包的后缀 &ndash;&gt;-->
+                <!--<property name="enableSubPackages" value="false" />-->
+                <!--&lt;!&ndash; 从数据库返回的值被清理前后的空格 &ndash;&gt;-->
+                <!--<property name="trimStrings" value="true" />-->
+            <!--</javaModelGenerator>-->
+            <!--&lt;!&ndash; targetProject:mapper映射文件生成的位置 &ndash;&gt;-->
+            <!--<sqlMapGenerator targetPackage="src.main..resources.mappers"-->
+                             <!--targetProject=".\src">-->
+                <!--&lt;!&ndash; enableSubPackages:是否让schema作为包的后缀 &ndash;&gt;-->
+                <!--<property name="enableSubPackages" value="false" />-->
+            <!--</sqlMapGenerator>-->
+            <!--&lt;!&ndash; targetPackage：mapper接口生成的位置 &ndash;&gt;-->
+            <!--<javaClientGenerator type="XMLMAPPER"-->
+                                 <!--targetPackage="src.main.java.com.jnshu.backendsystem.dao"-->
+                                 <!--targetProject=".\src">-->
+                <!--&lt;!&ndash; enableSubPackages:是否让schema作为包的后缀 &ndash;&gt;-->
+                <!--<property name="enableSubPackages" value="false" />-->
+            <!--</javaClientGenerator>-->
+            <!--&lt;!&ndash; 指定数据库表 &ndash;&gt;-->
+            <!--<table schema="" tableName="banner_show"></table>-->
+            <!--<table schema="" tableName="company_info"></table>-->
+            <!--<table schema="" tableName="company_produce"></table>-->
+            <!--<table schema="" tableName="position_info"></table>-->
+            <!--<table schema="" tableName="module_table"></table>-->
+        <!--</context>-->
+    <!--</generatorConfiguration>-->
+
