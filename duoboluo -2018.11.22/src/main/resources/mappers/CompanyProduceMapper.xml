@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.backendsystem.dao.CompanyProduceMapper">
+    <resultMap id="BaseResultMap" type="com.jnshu.backendsystem.pojo.CompanyProduce">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="company_id" jdbcType="BIGINT" property="companyId"/>
+        <result column="produce_name" jdbcType="VARCHAR" property="produceName"/>
+        <result column="produce_slogan" jdbcType="VARCHAR" property="produceSlogan"/>
+        <result column="produce_logo" jdbcType="VARCHAR" property="produceLogo"/>
+        <result column="product_introduction" jdbcType="VARCHAR" property="productIntroduction"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+    </resultMap>
+
+    <!--新增公司产品-->
+    <insert id="insertCompanyProduce" parameterType="com.jnshu.backendsystem.pojo.CompanyProduce">
+    INSERT INTO company_produce(company_id,produce_name,produce_slogan,produce_logo,product_introduction,gmt_create,gmt_update,create_by,update_by) VALUES
+    ( #{companyId,jdbcType=BIGINT}, #{produceName,jdbcType=VARCHAR},
+    #{produceSlogan,jdbcType=VARCHAR}, #{produceLogo,jdbcType=VARCHAR}, #{productIntroduction,jdbcType=VARCHAR},
+    #{gmtCreate,jdbcType=BIGINT}, #{gmtUpdate,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR},
+    #{updateBy,jdbcType=VARCHAR})
+  </insert>
+
+    <!--更新公司产品-->
+    <update id="updatecompanyProduceByIde" parameterType="com.jnshu.backendsystem.pojo.CompanyProduce">
+        update company_produce
+        <set>
+            <if test="produceName != null">
+                produce_name = #{produceName,jdbcType=VARCHAR},
+            </if>
+            <if test="produceSlogan != null">
+                produce_slogan = #{produceSlogan,jdbcType=VARCHAR},
+            </if>
+            <if test="produceLogo != null">
+                produce_logo = #{produceLogo,jdbcType=VARCHAR},
+            </if>
+            <if test="productIntroduction != null">
+                product_introduction = #{productIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtUpdate != null">
+                gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!--删除公司产品信息-->
+    <delete id="deleteCompanyProduceByCompanyId" parameterType="java.lang.Long">
+        DELETE FROM company_produce WHERE company_id=#{companyId}
+    </delete>
+
+
+    <!--<select id="getCompanyProdureDetail" resultMap="BaseResultMap">-->
+    <!--(select produce_name,produce_slogan,produce_logo,product_introduction from company_produce where company_id=#{companyId});-->
+    <!--</select>-->
+
+
+    <!--<sql id="Example_Where_Clause">-->
+        <!--<where>-->
+            <!--<foreach collection="oredCriteria" item="criteria" separator="or">-->
+                <!--<if test="criteria.valid">-->
+                    <!--<trim prefix="(" prefixOverrides="and" suffix=")">-->
+                        <!--<foreach collection="criteria.criteria" item="criterion">-->
+                            <!--<choose>-->
+                                <!--<when test="criterion.noValue">-->
+                                    <!--and ${criterion.condition}-->
+                                <!--</when>-->
+                                <!--<when test="criterion.singleValue">-->
+                                    <!--and ${criterion.condition} #{criterion.value}-->
+                                <!--</when>-->
+                                <!--<when test="criterion.betweenValue">-->
+                                    <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                                <!--</when>-->
+                                <!--<when test="criterion.listValue">-->
+                                    <!--and ${criterion.condition}-->
+                                    <!--<foreach close=")" collection="criterion.value" item="listItem" open="("-->
+                                             <!--separator=",">-->
+                                        <!--#{listItem}-->
+                                    <!--</foreach>-->
+                                <!--</when>-->
+                            <!--</choose>-->
+                        <!--</foreach>-->
+                    <!--</trim>-->
+                <!--</if>-->
+            <!--</foreach>-->
+        <!--</where>-->
+    <!--</sql>-->
+    <!--<sql id="Update_By_Example_Where_Clause">-->
+        <!--<where>-->
+            <!--<foreach collection="example.oredCriteria" item="criteria" separator="or">-->
+                <!--<if test="criteria.valid">-->
+                    <!--<trim prefix="(" prefixOverrides="and" suffix=")">-->
+                        <!--<foreach collection="criteria.criteria" item="criterion">-->
+                            <!--<choose>-->
+                                <!--<when test="criterion.noValue">-->
+                                    <!--and ${criterion.condition}-->
+                                <!--</when>-->
+                                <!--<when test="criterion.singleValue">-->
+                                    <!--and ${criterion.condition} #{criterion.value}-->
+                                <!--</when>-->
+                                <!--<when test="criterion.betweenValue">-->
+                                    <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                                <!--</when>-->
+                                <!--<when test="criterion.listValue">-->
+                                    <!--and ${criterion.condition}-->
+                                    <!--<foreach close=")" collection="criterion.value" item="listItem" open="("-->
+                                             <!--separator=",">-->
+                                        <!--#{listItem}-->
+                                    <!--</foreach>-->
+                                <!--</when>-->
+                            <!--</choose>-->
+                        <!--</foreach>-->
+                    <!--</trim>-->
+                <!--</if>-->
+            <!--</foreach>-->
+        <!--</where>-->
+    <!--</sql>-->
+    <!--<sql id="Base_Column_List">-->
+    <!--id, company_id, produce_name, produce_slogan, produce_logo, product_introduction,-->
+    <!--gmt_create, gmt_update, create_by, update_by-->
+  <!--</sql>-->
+    <!--<select id="selectByExample" parameterType="com.jnshu.backendsystem.pojo.CompanyProduceExample"-->
+            <!--resultMap="BaseResultMap">-->
+        <!--select-->
+        <!--<if test="distinct">-->
+            <!--distinct-->
+        <!--</if>-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--from company_produce-->
+        <!--<if test="_parameter != null">-->
+            <!--<include refid="Example_Where_Clause"/>-->
+        <!--</if>-->
+        <!--<if test="orderByClause != null">-->
+            <!--order by ${orderByClause}-->
+        <!--</if>-->
+    <!--</select>-->
+    <!--<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+        <!--select-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--from company_produce-->
+        <!--where id = #{id,jdbcType=BIGINT}-->
+    <!--</select>-->
+    <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">-->
+    <!--delete from company_produce-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</delete>-->
+    <!--<delete id="deleteByExample" parameterType="com.jnshu.backendsystem.pojo.CompanyProduceExample">-->
+        <!--delete from company_produce-->
+        <!--<if test="_parameter != null">-->
+            <!--<include refid="Example_Where_Clause"/>-->
+        <!--</if>-->
+    <!--</delete>-->
+    <!--<insert id="insert" parameterType="com.jnshu.backendsystem.pojo.CompanyProduce">-->
+    <!--insert into company_produce (id, company_id, produce_name,-->
+    <!--produce_slogan, produce_logo, product_introduction,-->
+    <!--gmt_create, gmt_update, create_by,-->
+    <!--update_by)-->
+    <!--values (#{id,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}, #{produceName,jdbcType=VARCHAR},-->
+    <!--#{produceSlogan,jdbcType=VARCHAR}, #{produceLogo,jdbcType=VARCHAR}, #{productIntroduction,jdbcType=VARCHAR},-->
+    <!--#{gmtCreate,jdbcType=BIGINT}, #{gmtUpdate,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR},-->
+    <!--#{updateBy,jdbcType=VARCHAR})-->
+  <!--</insert>-->
+    <!--<insert id="insertSelective" parameterType="com.jnshu.backendsystem.pojo.CompanyProduce">-->
+        <!--insert into company_produce-->
+        <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+            <!--<if test="id != null">-->
+                <!--id,-->
+            <!--</if>-->
+            <!--<if test="companyId != null">-->
+                <!--company_id,-->
+            <!--</if>-->
+            <!--<if test="produceName != null">-->
+                <!--produce_name,-->
+            <!--</if>-->
+            <!--<if test="produceSlogan != null">-->
+                <!--produce_slogan,-->
+            <!--</if>-->
+            <!--<if test="produceLogo != null">-->
+                <!--produce_logo,-->
+            <!--</if>-->
+            <!--<if test="productIntroduction != null">-->
+                <!--product_introduction,-->
+            <!--</if>-->
+            <!--<if test="gmtCreate != null">-->
+                <!--gmt_create,-->
+            <!--</if>-->
+            <!--<if test="gmtUpdate != null">-->
+                <!--gmt_update,-->
+            <!--</if>-->
+            <!--<if test="createBy != null">-->
+                <!--create_by,-->
+            <!--</if>-->
+            <!--<if test="updateBy != null">-->
+                <!--update_by,-->
+            <!--</if>-->
+        <!--</trim>-->
+        <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+            <!--<if test="id != null">-->
+                <!--#{id,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="companyId != null">-->
+                <!--#{companyId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="produceName != null">-->
+                <!--#{produceName,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="produceSlogan != null">-->
+                <!--#{produceSlogan,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="produceLogo != null">-->
+                <!--#{produceLogo,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="productIntroduction != null">-->
+                <!--#{productIntroduction,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="gmtCreate != null">-->
+                <!--#{gmtCreate,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="gmtUpdate != null">-->
+                <!--#{gmtUpdate,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="createBy != null">-->
+                <!--#{createBy,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="updateBy != null">-->
+                <!--#{updateBy,jdbcType=VARCHAR},-->
+            <!--</if>-->
+        <!--</trim>-->
+    <!--</insert>-->
+    <!--<select id="countByExample" parameterType="com.jnshu.backendsystem.pojo.CompanyProduceExample"-->
+            <!--resultType="java.lang.Long">-->
+        <!--select count(*) from company_produce-->
+        <!--<if test="_parameter != null">-->
+            <!--<include refid="Example_Where_Clause"/>-->
+        <!--</if>-->
+    <!--</select>-->
+    <!--<update id="updateByExampleSelective" parameterType="map">-->
+        <!--update company_produce-->
+        <!--<set>-->
+            <!--<if test="record.id != null">-->
+                <!--id = #{record.id,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="record.companyId != null">-->
+                <!--company_id = #{record.companyId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="record.produceName != null">-->
+                <!--produce_name = #{record.produceName,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="record.produceSlogan != null">-->
+                <!--produce_slogan = #{record.produceSlogan,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="record.produceLogo != null">-->
+                <!--produce_logo = #{record.produceLogo,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="record.productIntroduction != null">-->
+                <!--product_introduction = #{record.productIntroduction,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="record.gmtCreate != null">-->
+                <!--gmt_create = #{record.gmtCreate,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="record.gmtUpdate != null">-->
+                <!--gmt_update = #{record.gmtUpdate,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="record.createBy != null">-->
+                <!--create_by = #{record.createBy,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="record.updateBy != null">-->
+                <!--update_by = #{record.updateBy,jdbcType=VARCHAR},-->
+            <!--</if>-->
+        <!--</set>-->
+        <!--<if test="_parameter != null">-->
+            <!--<include refid="Update_By_Example_Where_Clause"/>-->
+        <!--</if>-->
+    <!--</update>-->
+    <!--<update id="updateByExample" parameterType="map">-->
+        <!--update company_produce-->
+        <!--set id = #{record.id,jdbcType=BIGINT},-->
+        <!--company_id = #{record.companyId,jdbcType=BIGINT},-->
+        <!--produce_name = #{record.produceName,jdbcType=VARCHAR},-->
+        <!--produce_slogan = #{record.produceSlogan,jdbcType=VARCHAR},-->
+        <!--produce_logo = #{record.produceLogo,jdbcType=VARCHAR},-->
+        <!--product_introduction = #{record.productIntroduction,jdbcType=VARCHAR},-->
+        <!--gmt_create = #{record.gmtCreate,jdbcType=BIGINT},-->
+        <!--gmt_update = #{record.gmtUpdate,jdbcType=BIGINT},-->
+        <!--create_by = #{record.createBy,jdbcType=VARCHAR},-->
+        <!--update_by = #{record.updateBy,jdbcType=VARCHAR}-->
+        <!--<if test="_parameter != null">-->
+            <!--<include refid="Update_By_Example_Where_Clause"/>-->
+        <!--</if>-->
+    <!--</update>-->
+    <!--<update id="updateByPrimaryKeySelective" parameterType="com.jnshu.backendsystem.pojo.CompanyProduce">-->
+        <!--update company_produce-->
+        <!--<set>-->
+            <!--<if test="companyId != null">-->
+                <!--company_id = #{companyId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="produceName != null">-->
+                <!--produce_name = #{produceName,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="produceSlogan != null">-->
+                <!--produce_slogan = #{produceSlogan,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="produceLogo != null">-->
+                <!--produce_logo = #{produceLogo,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="productIntroduction != null">-->
+                <!--product_introduction = #{productIntroduction,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="gmtCreate != null">-->
+                <!--gmt_create = #{gmtCreate,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="gmtUpdate != null">-->
+                <!--gmt_update = #{gmtUpdate,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="createBy != null">-->
+                <!--create_by = #{createBy,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="updateBy != null">-->
+                <!--update_by = #{updateBy,jdbcType=VARCHAR},-->
+            <!--</if>-->
+        <!--</set>-->
+        <!--where id = #{id,jdbcType=BIGINT}-->
+    <!--</update>-->
+    <!--<update id="updateByPrimaryKey" parameterType="com.jnshu.backendsystem.pojo.CompanyProduce">-->
+    <!--update company_produce-->
+    <!--set company_id = #{companyId,jdbcType=BIGINT},-->
+    <!--produce_name = #{produceName,jdbcType=VARCHAR},-->
+    <!--produce_slogan = #{produceSlogan,jdbcType=VARCHAR},-->
+    <!--produce_logo = #{produceLogo,jdbcType=VARCHAR},-->
+    <!--product_introduction = #{productIntroduction,jdbcType=VARCHAR},-->
+    <!--gmt_create = #{gmtCreate,jdbcType=BIGINT},-->
+    <!--gmt_update = #{gmtUpdate,jdbcType=BIGINT},-->
+    <!--create_by = #{createBy,jdbcType=VARCHAR},-->
+    <!--update_by = #{updateBy,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</update>-->
+
+</mapper>

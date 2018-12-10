@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.backendsystem.dao.PositionInfoMapper">
+    <resultMap id="BaseResultMap" type="com.jnshu.backendsystem.pojo.PositionInfo">
+        <id column="position_id" jdbcType="BIGINT" property="positionId"/>
+        <result column="is_recommend" jdbcType="INTEGER" property="isRecommend"/>
+        <result column="position_name" jdbcType="VARCHAR" property="positionName"/>
+        <result column="company_id" jdbcType="BIGINT" property="companyId"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="work_experience" jdbcType="INTEGER" property="workExperience"/>
+        <result column="education" jdbcType="INTEGER" property="education"/>
+        <result column="salary" jdbcType="INTEGER" property="salary"/>
+        <result column="position_type" jdbcType="INTEGER" property="positionType"/>
+        <result column="position_tag" jdbcType="VARCHAR" property="positionTag"/>
+        <result column="positionlevel" jdbcType="VARCHAR" property="positionlevel"/>
+        <result column="post_duties" jdbcType="VARCHAR" property="postDuties"/>
+        <result column="skills" jdbcType="VARCHAR" property="skills"/>
+        <result column="welfare" jdbcType="VARCHAR" property="welfare"/>
+        <result column="online_time" jdbcType="BIGINT" property="onlineTime"/>
+        <result column="is_online" jdbcType="INTEGER" property="isOnline"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <!--<result column="companyInfos" jdbcType="List" property="companyInfos"/>-->
+    </resultMap>
+
+    <select id="selectOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * from position_info where position_id=#{position_id}
+    </select>
+
+    <resultMap id="queryPositionInfoListMap" type="com.jnshu.backendsystem.pojo.PositionInfo">
+        <id column="position_id" jdbcType="BIGINT" property="positionId"/>
+        <result column="is_recommend" jdbcType="INTEGER" property="isRecommend"/>
+        <result column="position_name" jdbcType="VARCHAR" property="positionName"/>
+        <result column="company_id" jdbcType="BIGINT" property="companyId"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="work_experience" jdbcType="INTEGER" property="workExperience"/>
+        <result column="education" jdbcType="INTEGER" property="education"/>
+        <result column="salary" jdbcType="INTEGER" property="salary"/>
+        <result column="position_type" jdbcType="INTEGER" property="positionType"/>
+        <result column="position_tag" jdbcType="VARCHAR" property="positionTag"/>
+        <result column="positionlevel" jdbcType="VARCHAR" property="positionlevel"/>
+        <result column="post_duties" jdbcType="VARCHAR" property="postDuties"/>
+        <result column="skills" jdbcType="VARCHAR" property="skills"/>
+        <result column="welfare" jdbcType="VARCHAR" property="welfare"/>
+        <result column="online_time" jdbcType="BIGINT" property="onlineTime"/>
+        <result column="is_online" jdbcType="INTEGER" property="isOnline"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+
+        <collection property="companyInfos" javaType="java.util.List" ofType="com.jnshu.backendsystem.pojo.CompanyInfo">
+            <id column="company_id" jdbcType="BIGINT" property="companyId"/>
+            <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+            <result column="company_slogan" jdbcType="VARCHAR" property="companySlogan"/>
+            <result column="number_of_companies" jdbcType="BIGINT" property="numberOfCompanies"/>
+            <result column="financing_scale" jdbcType="INTEGER" property="financingScale"/>
+            <result column="city" jdbcType="VARCHAR" property="city"/>
+            <result column="area" jdbcType="VARCHAR" property="area"/>
+            <result column="company_industry" jdbcType="INTEGER" property="companyIndustry"/>
+            <result column="company_logo" jdbcType="VARCHAR" property="companyLogo"/>
+            <result column="company_profile" jdbcType="VARCHAR" property="companyProfile"/>
+            <result column="company_tag" jdbcType="VARCHAR" property="companyTag"/>
+            <result column="Is_approve" jdbcType="INTEGER" property="isApprove"/>
+            <result column="Is_frozen" jdbcType="INTEGER" property="isFrozen"/>
+            <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+            <result column="gmt_update" jdbcType="BIGINT" property="gmtUpdate"/>
+            <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+            <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        </collection>
+    </resultMap>
+
+    <!--后端前台-->
+    <!--搜索职位信息-->
+    <select id="searchPositionList" resultMap="BaseResultMap">
+        select c.company_id,c.company_name,c.company_logo,c.city,c.area,p.position_id,p.position_name,p.salary,
+        p.education,p.work_experience,p.welfare,p.gmt_update from company_info c,position_info p
+        <where>
+            c.company_id = p.company_id
+            <if test="positionName !=null">
+                AND p.position_name like CONCAT('%',#{positionName},'%')
+            </if>
+            <if test="isRecommend !=null">
+                AND p.is_recommend =#{isRecommend}
+            </if>
+            <if test="positionType !=null">
+                AND p.position_type IN
+                <foreach item="positionType" index="index" collection="positionType"
+                         open="(" separator="," close=")">
+                    #{positionType}
+                </foreach>
+            </if>
+            <if test="companyIndustry !=null">
+                AND c.company_industry IN
+                <foreach item="companyIndustry" index="index" collection="companyIndustry"
+                         open="(" separator="," close=")">
+                    #{companyIndustry}
+                </foreach>
+            </if>
+            <if test="education !=null">
+                AND p.education IN
+                <foreach item="education" index="index" collection="education"
+                         open="(" separator="," close=")">
+                    #{education}
+                </foreach>
+            </if>
+            <if test="workExperience !=null">
+                AND p.work_experience IN
+                <foreach item="workExperience" index="index" collection="workExperience"
+                         open="(" separator="," close=")">
+                    #{workExperience}
+                </foreach>
+            </if>
+            <if test="salary !=null">
+                AND p.salary IN
+                <foreach item="salary" index="index" collection="salary"
+                         open="(" separator="," close=")">
+                    #{salary}
+                </foreach>
+            </if>
+            <if test="beginDate != null and beginDate != ''">
+                AND p.gmt_update <![CDATA[>=]]> #{beginDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                AND p.gmt_update <![CDATA[<=]]>#{endDate}
+            </if>
+        </where>
+        order by p.gmt_update desc
+    </select>
+
+    <!--返回最新4个推荐职位-->
+    <select id="fourRecommendPosition" resultMap="BaseResultMap">
+    select c.company_id,c.company_logo,c.company_name,p.position_id,p.position_name,p.salary from company_info c,position_info p where c.company_id=p.company_id  and is_recommend=1 order by p.gmt_update limit 4
+     </select>
+
+    <!--首页最新、推荐职位，根据总数返回固定值-->
+    <select id="searchNewOrRecommendPosition" resultMap="BaseResultMap">
+        select c.company_id,c.company_name,c.company_logo,p.position_id,p.position_name,p.salary from company_info c,position_info p where c.company_id=p.company_id and p.is_recommend=#{isRecommend} order by p.gmt_update desc limit #{total}  ;
+    </select>
+
+    <!--职位详情-->
+    <select id="getPositionDetail" resultMap="queryPositionInfoListMap" parameterType="java.lang.Long">
+        select  c.company_id,c.company_name,c.company_slogan,c.company_logo,c.city,c.area,c.company_industry,c.company_tag,p.position_id,p.position_name,p.education,p.work_experience, p.salary,p.welfare,c.number_of_companies,p.gmt_update,p.skills,
+        p.post_duties from company_info c,position_info p  where position_id=#{positionId} and p.company_id=c.company_id;
+    </select>
+
+
+    <!--后端后台-->
+    <!--查询上线招聘职位数-->
+    <select id="queryPositionOnlineCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(1) from position_info where company_id=#{companyId} and is_online=1
+    </select>
+    <!--删除职位信息-->
+    <delete id="deletePositionInfoByCompanyId" parameterType="java.lang.Long">
+        DELETE FROM position_info WHERE company_id=#{companyId}
+    </delete>
+
+
+    <!--查询职位列表-->
+    <select id="qureyPositionList" resultMap="BaseResultMap">
+        SELECT
+        c.company_id,
+        c.company_name,p.position_id,p.position_name,c.company_industry,p.position_type,p.salary,p.education,p.work_experience,p.gmt_update,p.is_online,p.is_recommend
+        FROM company_info AS c , position_info AS p
+        <where>
+            p.company_id = c.company_id
+            <if test="companyId !=null">
+                AND p.company_id =#{companyId}
+            </if>
+            <if test="companyName !=null">
+                AND c.company_name LIKE CONCAT('%',#{companyName},'%')
+            </if>
+            <if test="positionName !=null">
+                AND p.position_name LIKE CONCAT('%',#{positionName},'%')
+            </if>
+            <if test="positionType !=null">
+                AND p.position_type =#{positionType}
+            </if>
+            <if test="education !=null">
+                AND p.education =#{education}
+            </if>
+            <if test="workExperience !=null">
+                AND p.work_Experience =#{workExperience}
+            </if>
+            <if test="salary !=null">
+                AND p.salary =#{salary}
+            </if>
+            <if test="isOnline !=null">
+                AND p.is_online =#{isOnline}
+            </if>
+            <if test="beginDate != null and beginDate != ''">
+                AND p.gmt_update <![CDATA[>=]]> #{beginDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                AND p.gmt_update <![CDATA[<=]]>#{endDate}
+            </if>
+        </where>
+        GROUP BY p.position_id ORDER BY p.gmt_update desc
+    </select>
+
+    <!--新增职位信息-->
+    <insert id="insertPositionByCompanyId" parameterType="com.jnshu.backendsystem.pojo.PositionInfo">
+        insert into position_info (is_recommend, position_name,
+        company_id, company_name, work_experience,
+        education, salary, position_type,
+        position_tag, positionlevel, post_duties,
+        skills, welfare,gmt_create, gmt_update,
+        create_by, update_by)
+        values (#{isRecommend,jdbcType=INTEGER}, #{positionName,jdbcType=VARCHAR},
+        #{companyId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR}, #{workExperience,jdbcType=INTEGER},
+        #{education,jdbcType=INTEGER}, #{salary,jdbcType=INTEGER}, #{positionType,jdbcType=INTEGER},
+        #{positionTag,jdbcType=VARCHAR}, #{positionlevel,jdbcType=VARCHAR}, #{postDuties,jdbcType=VARCHAR},
+        #{skills,jdbcType=VARCHAR}, #{welfare,jdbcType=VARCHAR},  #{gmtCreate,jdbcType=BIGINT}, #{gmtUpdate,jdbcType=BIGINT},
+        #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR})
+    </insert>
+
+    <!--获取单个职位信息-->
+    <select id="qureyOnePosition" resultMap="BaseResultMap">
+        select company_id,company_name,position_id,position_name,work_experience,salary,education,position_type,welfare,post_duties,skills,position_tag,is_online,is_recommend
+        from position_info where position_id= #{positionId,jdbcType=BIGINT}
+    </select>
+
+    <!--更新职位信息-->
+    <update id="updateByPositionId" parameterType="com.jnshu.backendsystem.pojo.PositionInfo">
+        update position_info
+        <set>
+            <if test="isRecommend != null">
+                is_recommend = #{isRecommend,jdbcType=INTEGER},
+            </if>
+            <if test="positionName != null">
+                position_name = #{positionName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="companyName != null">
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="workExperience != null">
+                work_experience = #{workExperience,jdbcType=INTEGER},
+            </if>
+            <if test="education != null">
+                education = #{education,jdbcType=INTEGER},
+            </if>
+            <if test="salary != null">
+                salary = #{salary,jdbcType=INTEGER},
+            </if>
+            <if test="positionType != null">
+                position_type = #{positionType,jdbcType=INTEGER},
+            </if>
+            <if test="positionTag != null">
+                position_tag = #{positionTag,jdbcType=VARCHAR},
+            </if>
+            <if test="postDuties != null">
+                post_duties = #{postDuties,jdbcType=VARCHAR},
+            </if>
+            <if test="skills != null">
+                skills = #{skills,jdbcType=VARCHAR},
+            </if>
+            <if test="welfare != null">
+                welfare = #{welfare,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtUpdate != null">
+                gmt_update = #{gmtUpdate,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where position_id = #{positionId,jdbcType=BIGINT}
+    </update>
+
+    <!--删除职位信息-->
+    <select id="qureyIsOnline" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        SELECT is_online FROM position_info WHERE  position_id=#{positionId}
+    </select>
+    <delete id="deleteByPositionId" parameterType="java.lang.Long">
+        DELETE FROM  position_info WHERE position_id=#{positionId}
+    </delete>
+
+    <!--更改职位状态-->
+    <update id="updatePositionInfoByPositionIid"  parameterType="com.jnshu.backendsystem.pojo.PositionInfo" >
+        UPDATE position_info SET is_online=#{isOnline} WHERE  position_id=#{positionId}
+    </update>
+
+
+</mapper>
