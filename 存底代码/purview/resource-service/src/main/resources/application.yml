@@ -1,0 +1,42 @@
+--- 
+eureka: 
+  client: 
+    serviceUrl: 
+      defaultZone: "http://localhost:8761/eureka/"
+feign: 
+  hystrix: 
+    enabled: true
+logging: 
+  config: "classpath:logging-config.xml"
+mybatis: 
+  configuration: 
+    cache-enabled: true
+    map-underscore-to-camel-case: true
+  mapper-locations: "classpath*:mappers/*Mapper.xml"
+  type-aliases-package: com.jnshu.resourceservice.entity
+server: 
+  port: 9090
+spring: 
+  application: 
+    name: sources-service
+  datasource: 
+    filters: "stat,wall,slf4j"
+    initialSize: 5
+    logSlowSql: true
+    maxActive: 20
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 5
+    password: 123456
+    platform: mysql
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: "jdbc:mysql://localhost:3306/more_pineapple_purview_uaa?serverTimezone=GMT&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true"
+    username: root
+  jackson: 
+    date-format: "yyyy-MM-dd HH:mm:ss"
+#    default-property-inclusion: non_null
+#    time-zone: Asia/Shanghai

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.uaaservice.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.jnshu.uaaservice.pojo.Role">
+    <!--<constructor>-->
+      <!--<idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />-->
+      <!--<arg column="role_name" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="gmt_create" javaType="java.lang.Long" jdbcType="BIGINT" />-->
+      <!--<arg column="gmt_update" javaType="java.lang.Long" jdbcType="BIGINT" />-->
+      <!--<arg column="create_by" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="update_by" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+      <!--<arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />-->
+    <!--</constructor>-->
+
+    <id column="id" property="id"/>
+    <result column="role_name" property="roleName"/>
+    <result column="gmt_create" property="gmtCreate"/>
+    <result column="gmt_update" property="gmtUpdate"/>
+    <result column="create_by" property="createBy"/>
+    <result column="update_by" property="updateBy"/>
+    <result column="status" property="status"/>
+    <collection property="permissionsList" ofType="com.jnshu.uaaservice.pojo.Permission" autoMapping="true"/>
+  </resultMap>
+
+    <!--<resultMap id="PermissionResultMap" type="com.jnshu.uaaservice.pojo.Permission">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="permission_name" property="permissionName"/>-->
+        <!--<result column="gmt_create" property="gmtCreate"/>-->
+        <!--<result column="gmt_update" property="gmtUpdate"/>-->
+        <!--<result column="create_by" property="createBy"/>-->
+        <!--<result column="update_by" property="updateBy"/>-->
+    <!--</resultMap>-->
+
+  <sql id="Base_Column_List">
+    id, role_name, gmt_create, gmt_update, create_by, update_by, status
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where id = #{id}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role
+    where id = #{id}
+  </delete>
+
+  <insert id="insert" parameterType="com.jnshu.uaaservice.pojo.Role">
+    insert into role (id, role_name, gmt_create, 
+      gmt_update, create_by, update_by, 
+      status)
+    values (#{id}, #{roleName}, #{gmtCreate},
+      #{gmtUpdate}, #{createBy}, #{updateBy},
+      #{status})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.uaaservice.pojo.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id},
+      </if>
+      <if test="roleName != null">
+        #{roleName},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate},
+      </if>
+      <if test="gmtUpdate != null">
+        #{gmtUpdate},
+      </if>
+      <if test="createBy != null">
+        #{createBy},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy},
+      </if>
+      <if test="status != null">
+        #{status},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.uaaservice.pojo.Role">
+    update role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate},
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update = #{gmtUpdate},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy},
+      </if>
+      <if test="status != null">
+        status = #{status},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.uaaservice.pojo.Role">
+    update role
+    set role_name = #{roleName},
+      gmt_create = #{gmtCreate},
+      gmt_update = #{gmtUpdate},
+      create_by = #{createBy},
+      update_by = #{updateBy},
+      status = #{status}
+    where id = #{id}
+  </update>
+
+  <select id="selectRolePermissionById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT
+	r.id,
+	r.role_name,
+	r.gmt_create,
+	r.gmt_update,
+	r.create_by,
+	r.update_by,
+	r.`status`,
+	p.id,
+	p.permission_name,
+	p.gmt_create,
+	p.gmt_update,
+	p.create_by,
+	p.update_by
+    FROM
+	role AS r
+	INNER JOIN role_permission AS rp ON r.id = rp.role_id
+	INNER JOIN permission AS p ON rp.node_id = p.id
+    WHERE
+	r.id = #{id}
+  </select>
+
+
+
+</mapper>

@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="purview">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/eureka-server/src/main/java" />
+      <root url="file://$PROJECT_DIR$/eureka-server/src/test/java" />
+      <root url="file://$PROJECT_DIR$/uaa-service/src/main/java" />
+      <root url="file://$PROJECT_DIR$/uaa-service/src/test/java" />
+    </SOURCES>
+  </library>
+</component>
