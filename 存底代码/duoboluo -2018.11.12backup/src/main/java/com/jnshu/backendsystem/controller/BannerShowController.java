@@ -7,6 +7,7 @@ import com.jnshu.backendsystem.pojo.PositionInfo2;
 import com.jnshu.backendsystem.pojo.Result;
 import com.jnshu.backendsystem.service.BannerShowService;
 import com.jnshu.backendsystem.service.impl.BannerShowServiceImpl;
+import com.sun.xml.internal.bind.v2.*;
 import io.swagger.models.auth.In;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
