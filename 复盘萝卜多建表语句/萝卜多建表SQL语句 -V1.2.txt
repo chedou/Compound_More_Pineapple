@@ -102,6 +102,7 @@ create table banner_show(
  update_by varchar(100) NOT NULL COMMENT '更新人 ')
  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='banner图展示表';
 
+
 use  more_pineapple;
 create table user_roler(
  id int auto_increment primary key NOT NULL COMMENT 'id：与 User 表中的id 对应',
